@@ -1,4 +1,5 @@
-delete from product;
+delete
+from product;
 insert into public.product (product_id, name, description, product_type_id, open_date, create_time, create_user,
                             last_modify_time, last_modify_user)
 values (1, 'Test Card', 'Test Card Description', 1, '2024-08-02T10:10:10.00Z'::timestamptz,

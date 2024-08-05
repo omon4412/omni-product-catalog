@@ -2,6 +2,7 @@ package ru.bank.omniproductcatalog.product.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -71,8 +72,11 @@ public class ProductServiceImpl implements ProductService {
                     return productRepository.save(product)
                             .map(savedProduct -> {
                                 ProductResponseDto productResponseDto = mapToResponseDto(savedProduct, productType);
-                                cacheManager.getCache("products").put(savedProduct.getId(), productResponseDto);
-                                cacheManager.getCache("products").clear();
+                                Cache cache = cacheManager.getCache("products");
+                                if (cache != null) {
+                                    cache.put(savedProduct.getId(), productResponseDto);
+                                    cache.clear();
+                                }
                                 return productResponseDto;
                             });
                 });
@@ -115,6 +119,11 @@ public class ProductServiceImpl implements ProductService {
                 })
                 .map(savedProduct -> {
                     ProductResponseDto productResponseDto = productMapper.toProductResponseDto(savedProduct);
+                    Cache cache = cacheManager.getCache("products");
+                    if (cache != null) {
+                        cache.put(savedProduct.getId(), productResponseDto);
+                        cache.clear();
+                    }
                     cacheManager.getCache("products").evict(savedProduct.getId());
                     cacheManager.getCache("products").put(savedProduct.getId(), productResponseDto);
                     cacheManager.getCache("products").clear();

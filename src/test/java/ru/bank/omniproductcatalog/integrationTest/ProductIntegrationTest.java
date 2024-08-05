@@ -1,22 +1,16 @@
 package ru.bank.omniproductcatalog.integrationTest;
 
 import io.r2dbc.spi.ConnectionFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
 import org.springframework.r2dbc.connection.init.ScriptUtils;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.testcontainers.containers.PostgreSQLContainer;
 import reactor.core.publisher.Mono;
 import ru.bank.omniproductcatalog.model.product.NewProductRequestDto;
 import ru.bank.omniproductcatalog.model.product.ProductResponseDto;
