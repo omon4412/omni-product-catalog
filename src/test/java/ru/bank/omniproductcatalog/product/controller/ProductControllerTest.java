@@ -105,7 +105,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void createProduct_whenNameIsNull_success() {
+    void createProduct_whenNameIsNull_fail() {
         NewProductRequestDto newProductRequestDto = new NewProductRequestDto(null, 1L, "Product Description", false);
 
         webTestClient.post()
@@ -119,7 +119,26 @@ class ProductControllerTest {
     }
 
     @Test
-    void createProduct_whenNameIsBlank_success() {
+    void createProduct_whenNewProductRequestDtoIsEmpty_fail() {
+        webTestClient.post()
+                .uri("/api/v1/products")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue("{}")
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    void createProduct_whenNewProductRequestDtoIsNull_fail() {
+        webTestClient.post()
+                .uri("/api/v1/products")
+                .contentType(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    void createProduct_whenNameIsBlank_fail() {
         NewProductRequestDto newProductRequestDto = new NewProductRequestDto("      ", 1L, "Product Description", false);
 
         webTestClient.post()
@@ -133,7 +152,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void createProduct_whenNameLengthLessThen3_success() {
+    void createProduct_whenNameLengthLessThen3_fail() {
         NewProductRequestDto newProductRequestDto = new NewProductRequestDto("te", 1L, "Product Description", false);
 
         webTestClient.post()
@@ -147,7 +166,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void createProduct_whenNameLengthMoreThen128_success() {
+    void createProduct_whenNameLengthMoreThen128_fail() {
         NewProductRequestDto newProductRequestDto
                 = new NewProductRequestDto("tetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetete",
                 1L, "Product Description", false);
@@ -163,7 +182,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void createProduct_whenDescriptionIsNull_success() {
+    void createProduct_whenDescriptionIsNull_fail() {
         NewProductRequestDto newProductRequestDto = new NewProductRequestDto("Card name", 1L, null, false);
 
         webTestClient.post()
@@ -177,7 +196,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void createProduct_whenDescriptionIsBlank_success() {
+    void createProduct_whenDescriptionIsBlank_fail() {
         NewProductRequestDto newProductRequestDto = new NewProductRequestDto("Card name", 1L, "    ", false);
 
         webTestClient.post()
@@ -191,7 +210,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void createProduct_whenDescriptionLengthLessThen3_success() {
+    void createProduct_whenDescriptionLengthLessThen3_fail() {
         NewProductRequestDto newProductRequestDto = new NewProductRequestDto("Card name", 1L, "te", false);
 
         webTestClient.post()
@@ -205,7 +224,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void createProduct_whenDescriptionLengthMoreThen128_success() {
+    void createProduct_whenDescriptionLengthMoreThen128_fail() {
         NewProductRequestDto newProductRequestDto
                 = new NewProductRequestDto("Card name",
                 1L, "tetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetete" +
