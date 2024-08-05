@@ -1,1 +1,3 @@
 rootProject.name = 'omni-product-catalog'
+include 'omni-product-catalog-model'
+

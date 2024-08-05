@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-product-type-table
+      author: admin
+      changes:
+        - createTable:
+            tableName: product_type
+            columns:
+              - column:
+                  name: product_type_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(256)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: create_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: current_timestamp
+              - column:
+                  name: create_user
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modify_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: current_timestamp
+              - column:
+                  name: last_modify_user
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false

@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill-product-type
+      author: admin
+      changes:
+        - delete:
+            tableName: product_type
+        - loadData:
+            tableName: product_type
+            file: db/changelog/v1/product-type/product-types.csv

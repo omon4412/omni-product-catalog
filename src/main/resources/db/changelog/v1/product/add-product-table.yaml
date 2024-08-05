@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-product-table
+      author: admin
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(256)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: product_type_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    references: product_type(product_type_id)
+                    foreignKeyName: fk_product_product_type
+              - column:
+                  name: open_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: close_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: create_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: current_timestamp
+              - column:
+                  name: create_user
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modify_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: current_timestamp
+              - column:
+                  name: last_modify_user
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false

@@ -1,0 +1,21 @@
+application:
+  product:
+    timeout: 20000
+  cache:
+    ttl_s: 15
+
+spring:
+  application:
+    name: omni-product-catalog
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/omni-product-catalog
+    username: postgres
+    password: postgres
+  liquibase:
+    url: jdbc:postgresql://localhost:5432/omni-product-catalog
+    user: ${spring.r2dbc.username}
+    password: ${spring.r2dbc.password}
+    driver-class-name: org.postgresql.Driver
+    enabled: true
+  cache:
+    type: caffeine

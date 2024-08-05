@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: v1/product-type/add-product-type-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1/product-type/fill-product-type.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1/product/add-product-table.yaml
+      relativeToChangelogFile: true
